@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery example: drag and drop</title>
+    <style>
+
+        body {
+            font-size: 32px;
+        }
+
+        #dropzone {
+            top: 150px;
+            width: 200px;
+            height: 200px;
+            background: cyan;
+            border: solid 1px;
+        }
+    </style>
+</head>
+<body>
+    <div>Drag M5 into the rectangle</div>
+    <img id="M5" img src="https://cdn.bringatrailer.com/wp-content/uploads/2018/01/5a6fbe2a6fb40_1516932512e7b7a77dfa630D5EADA8-32A4-4814-B76E-96109A25EF32-e1517380240754-940x663.jpeg" alt="M5" width="199" height="199">
+
+    <div id="dropzone"></div>
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="libraries/jQuery/jquery.ui.touch-punch.js"></script>
+
+    <p id="beskrivelse"></p>
+
+    <div class="main-wrapper" id="dynamicContent">
+        <div class="grid-container" id="houses">
+        </div>
+        <div class="dataPanel" id="dataPanel">
+            <span id="dataPanelHeader">KORTSTOKK</span>
+            <ul class="noDecoration" id="panelList">
+                <li>
+                    <div class="kortstokk" id="kortstokk">
+                        <span id="kortstokkSpan">KORTSTOKK</span>
+                        <div class="drag-drop" id="kortholder" onclick="select(this)">
+                            <img class="kort" id="trukketKort" src="" name="" />
+                        </div>
+                    </div>
+                </li>
+                <li id="trekk"><button class="panelButton button" id="drawButton" onclick="drawCard()">TREKK</button></li>
+                <li id="reset"><button class="panelButton button hidden" id="resetButton" onclick="resetHouses()">RESET</button></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        $("#M5").draggable();
+        $("#dropzone").droppable({
+            drop: function (event, ui) {
+                $(this).css('background', 'rgb(0,200,0)');
+            },
+            over: function (event, ui) {
+                $(this).css('background', 'orange');
+            },
+            out: function (event, ui) {
+                $(this).css('background', 'cyan');
+            }
+        });
+
+        class Kategori {
+            constructor(kategori, subkategorier) {
+                /** :Object: Kategori
+                 * :param kategori: kategori
+                 * :param subkategorier: subcategories under kategori in array
+                 */
+                this.kategori = kategori;
+                this.subkategorier = subkategorier; //array
+            }
+        }
+
+        class Kort {
+            constructor(params, debug = false) {
+                /** :Object: Kort
+                 * :param Kategori: kategori
+                 * :param img: image url
+                 * :param navn: card name
+                 */
+                this.kategori = params.kategori;
+                this.navn = params.name[language.slice(0, 3)];
+                this.subkategorier = subkategorier[this.kategori];
+                this.img = params.src;
+                this.debug = debug;
+            }
+        }
+
+// #endregion
+
+    </script>
+
+</body>
+</html>
